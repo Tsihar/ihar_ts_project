@@ -49,8 +49,6 @@ class Main_page(Base):
     """Methods"""
 
     def authorization(self):
-        self.driver.get(self.url)
-        self.driver.maximize_window()
         self.click_ok_cookies_button()
         self.click_account_button()
         self.click_login_button()

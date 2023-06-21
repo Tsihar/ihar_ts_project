@@ -4,15 +4,15 @@ from selenium.webdriver.chrome.service import Service
 
 
 @pytest.fixture()
-def set_up():
+def open_site():
     options = webdriver.ChromeOptions()
     options.add_experimental_option("detach", True)
     g = Service()
     driver = webdriver.Chrome(options=options, service=g)
-    driver.maximize_window()
     url = 'https://www.21vek.by/'
     driver.get(url)
-    #
-    # yield
-    #
-    # driver.quit()
+    driver.maximize_window()
+
+    yield driver
+
+    driver.quit()
