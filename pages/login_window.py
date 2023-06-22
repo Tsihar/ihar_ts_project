@@ -58,3 +58,5 @@ class Login_window(Base):
         self.insert_email(self.email)
         self.insert_password(self.password)
         self.click_login_submit_button()
+        self.Main_page.click_account_button()
+        self.Base.assert_text(self.Manage_account_popup.get_email_word(), self.email)
