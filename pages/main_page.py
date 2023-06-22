@@ -15,8 +15,6 @@ class Main_page(Base):
 
     ok_cookies_button = "//button[@class='Button-module__button Button-module__blue-primary']"
     account_button = "//button[@class='styles_userToolsToggler__imcSl']"
-    login_button = "//button[@data-testid='loginButton']"
-    enter_word = "//h5[@class='style_formTitle__hRNRz']"
 
     """Getters"""
 
@@ -26,11 +24,6 @@ class Main_page(Base):
     def get_account_button(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.account_button)))
 
-    def get_login_button(self):
-        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.login_button)))
-
-    def get_enter_word(self):
-        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.enter_word)))
 
     """Actions"""
 
@@ -42,14 +35,9 @@ class Main_page(Base):
         self.get_account_button().click()
         print('Account button is clicked')
 
-    def click_login_button(self):
-        self.get_login_button().click()
-        print('Login button is clicked')
 
     """Methods"""
 
-    def authorization(self):
-        self.click_ok_cookies_button()
+    def open_manage_acc_popup(self):
+        self.click_ok_cookies_button() # accept cookies
         self.click_account_button()
-        self.click_login_button()
-        self.assert_text(self.get_enter_word(), "Вход")

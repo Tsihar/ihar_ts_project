@@ -15,4 +15,4 @@ def open_site():
 
     yield driver
 
-    driver.quit()
+    # driver.quit()
