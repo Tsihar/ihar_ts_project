@@ -39,3 +39,4 @@ class Manage_account_popup(Base):
     def open_login_window(self):
         self.click_login_button()
         self.assert_text(self.get_enter_word(), "Вход")
+

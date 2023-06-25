@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
@@ -14,9 +16,6 @@ class Login_window(Base):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.Manage_account_popup = Manage_account_popup
-        self.Base = Base
-        self.Main_page = Main_page
         self.driver = driver
         self.email = "tita_13@mail.ru"
         self.password = "0e24fd0b"
@@ -58,5 +57,3 @@ class Login_window(Base):
         self.insert_email(self.email)
         self.insert_password(self.password)
         self.click_login_submit_button()
-        self.Main_page.click_account_button()
-        self.Base.assert_text(self.Manage_account_popup.get_email_word(), self.email)
