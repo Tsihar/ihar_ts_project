@@ -4,6 +4,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 from base.base_class import Base
+from pages.catalog_popup import Catalog_popup
 from pages.login_window import Login_window
 from pages.main_page import Main_page
 from pages.manage_account_popup import Manage_account_popup
@@ -28,5 +29,9 @@ def test_e2e(open_site):
 
     bc = Base(fix_driver)
     bc.assert_text(ap.get_email_word(), lw.email)
+
+    mp.click_catalog_button() #open catalog and choose item
+    cp = Catalog_popup(fix_driver)
+    cp.expand_tourism_items()
 
 

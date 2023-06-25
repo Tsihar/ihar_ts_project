@@ -5,18 +5,13 @@ from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
 from base.base_class import Base
-from pages.main_page import Main_page
-from pages.manage_account_popup import Manage_account_popup
 
 
 class Login_window(Base):
 
-    # global email
-    # email = "tita_13@mail.ru"
-
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver = driver
+        # self.driver = driver
         self.email = "tita_13@mail.ru"
         self.password = "0e24fd0b"
 
