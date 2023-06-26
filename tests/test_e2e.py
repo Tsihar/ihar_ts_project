@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.service import Service
 
 from base.base_class import Base
 from pages.catalog_popup import Catalog_popup
+from pages.egg_cookers_page import Egg_cookers_page
 from pages.login_window import Login_window
 from pages.main_page import Main_page
 from pages.manage_account_popup import Manage_account_popup
@@ -30,8 +31,19 @@ def test_e2e(open_site):
     bc = Base(fix_driver)
     bc.assert_text(ap.get_email_word(), lw.email)
 
-    mp.click_catalog_button() #open catalog and choose item
+    # open catalog and choose section egg cookers
+    mp.click_catalog_button()
     cp = Catalog_popup(fix_driver)
-    cp.expand_tourism_items()
+    cp.open_egg_cookers_section()
+
+    ecp = Egg_cookers_page(fix_driver)
+    bc.assert_text(ecp.get_egg_cookers_word(), ecp.egg_cookers)
+    time.sleep(3)
+
+    # select egg cooker
+    ecp.set_min_price()
+
+
+
 
 
