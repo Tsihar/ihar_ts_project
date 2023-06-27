@@ -38,10 +38,9 @@ def test_e2e(open_site):
 
     ecp = Egg_cookers_page(fix_driver)
     bc.assert_text(ecp.get_egg_cookers_word(), ecp.egg_cookers)
-    time.sleep(3)
 
     # select egg cooker
-    ecp.set_min_price()
+    ecp.set_price_range()
 
 
 
