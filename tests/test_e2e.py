@@ -40,7 +40,8 @@ def test_e2e(open_site):
     bc.assert_text(ecp.get_egg_cookers_word(), ecp.egg_cookers)
 
     # select egg cooker
-    ecp.set_price_range()
+    ecp.set_filters()
+
 
 
 

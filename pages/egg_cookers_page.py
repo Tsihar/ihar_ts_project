@@ -18,6 +18,10 @@ class Egg_cookers_page(Base):
     egg_cookers_text = "//h1[@class='content__header cr-category_header']"
     min_price = "//input[@name='filter[price][from]']"
     max_price = "//input[@name='filter[price][to]']"
+    checkbox_in_stock = "//*[@id='j-filter__form']/div[2]/dl/div/dd[1]/label"
+    dropdown_material = "//*[@id='j-filter__form']/div[4]/dl[3]/dt/span"
+    checkbox_material_plastic = "//*[@id='j-filter__form']/div[4]/dl[3]/div/dd[1]/label"
+    show_items_button = "//span[@class='g-button__text']"
 
     """Getters"""
 
@@ -29,6 +33,19 @@ class Egg_cookers_page(Base):
 
     def get_max_price(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.max_price)))
+
+    def get_checkbox_in_stock(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.checkbox_in_stock)))
+
+    def get_dropdown_material(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.dropdown_material)))
+
+    def get_checkbox_material_plastic(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.checkbox_material_plastic)))
+
+    def get_show_items_button(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.show_items_button)))
+
 
     """Actions"""
 
@@ -42,10 +59,27 @@ class Egg_cookers_page(Base):
         self.get_max_price().send_keys(rn_max)
         print(f'max price is {rn_max}')
 
+    def click_checkbox_in_stock(self):
+        self.get_checkbox_in_stock().click()
+
+    def click_dropdown_material(self):
+        self.get_dropdown_material().click()
+
+    def click_checkbox_material_plastic(self):
+        self.get_checkbox_material_plastic().click()
+
+    def click_show_items_button(self):
+        self.get_show_items_button()
+
+
     """Methods"""
 
-    def set_price_range(self):
+    def set_filters(self):
         self.set_min_price()
         self.set_max_price()
+        self.click_checkbox_in_stock()
+        self.click_dropdown_material()
+        self.click_checkbox_material_plastic()
+        self.click_show_items_button()
 
 
