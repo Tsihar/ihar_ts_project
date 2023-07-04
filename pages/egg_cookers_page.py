@@ -22,6 +22,10 @@ class Egg_cookers_page(Base):
     dropdown_material = "//*[@id='j-filter__form']/div[4]/dl[3]/dt/span"
     checkbox_material_plastic = "//*[@id='j-filter__form']/div[4]/dl[3]/div/dd[1]/label"
     show_items_button = "//span[@class='g-button__text']"
+    items_counter = "//span[@id='j-filter__counter']"
+    paginator = "//div[@class='cr-paginator_page_list']"
+    bomann_egg_cooker_price = "//span[@data-code='6608212']"
+    add_bomann_into_cart_button = "//*[@id='j-result-page-1']/li[4]/dl/div[2]/form/button"
 
     """Getters"""
 
@@ -46,6 +50,18 @@ class Egg_cookers_page(Base):
     def get_show_items_button(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.show_items_button)))
 
+    def get_items_counter(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.items_counter)))
+
+    def get_paginator(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.paginator)))
+
+    def get_bomann_egg_cooker_price(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.bomann_egg_cooker_price)))
+
+    def get_add_bomann_into_cart_button(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.add_bomann_into_cart_button)))
+
 
     """Actions"""
 
@@ -69,8 +85,29 @@ class Egg_cookers_page(Base):
         self.get_checkbox_material_plastic().click()
 
     def click_show_items_button(self):
-        self.get_show_items_button()
+        self.get_show_items_button().click()
+        print('show items button is clicked')
 
+    def paginator_text(self):
+        paginator_text_value = self.get_paginator().text
+        print(f'number of items to show is {paginator_text_value}')
+        return paginator_text_value
+
+    def paginator_items_quantity_on_page(self): #method to find the number of items in the list of filtered egg cookers
+        splitted_paginator_text = self.paginator_text().split()
+        items_quantity = splitted_paginator_text[3]
+        print(f'number of items are displayed on the page is {items_quantity}')
+        return items_quantity
+
+    def bomann_egg_cooker_price_value(self):
+        value_text = self.get_bomann_egg_cooker_price().text
+        print(f'bomann egg cooker price is {value_text}')
+        return value_text
+
+    def click_add_bomann_into_cart_button(self):
+        self.action.move_to_element(self.get_add_bomann_into_cart_button()).perform()
+        self.get_add_bomann_into_cart_button().click()
+        print('bomann egg cooker is added to the cart')
 
     """Methods"""
 

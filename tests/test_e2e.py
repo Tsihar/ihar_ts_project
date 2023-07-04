@@ -39,8 +39,11 @@ def test_e2e(open_site):
     ecp = Egg_cookers_page(fix_driver)
     bc.assert_text(ecp.get_egg_cookers_word(), ecp.egg_cookers)
 
-    # select egg cooker
+    # set filters and verify that filter has been applied by comparing number of items in the paginator counter and "show items" button counter
     ecp.set_filters()
+    bc.assert_text(ecp.get_items_counter(), ecp.paginator_items_quantity_on_page())
+
+    ecp.click_add_bomann_into_cart_button()
 
 
 
