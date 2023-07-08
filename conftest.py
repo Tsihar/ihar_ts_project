@@ -2,6 +2,9 @@ import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
+from pages.cart_page import Cart_page
+from pages.main_page import Main_page
+
 
 @pytest.fixture()
 def open_site():
@@ -15,4 +18,10 @@ def open_site():
 
     yield driver
 
-    # driver.quit()
+    mp = Main_page(driver)
+    mp.click_cart_button()
+    cp = Cart_page(driver)
+    cp.click_remove_button()
+    cp.click_remove_confirmation_button()
+
+    driver.quit()

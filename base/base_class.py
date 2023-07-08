@@ -4,7 +4,8 @@ import random
 class Base:
 
     def __init__(self, driver):
-        self.driver = driver
+        driver1 = driver
+        self.driver = driver1
 
     """Method assert word"""
 
@@ -18,3 +19,12 @@ class Base:
             random.randint(start, end)
 
         return random.randint(start, end)
+
+    def assertions(self, value_1, value_2):
+        assert value_1 == value_2
+        print('Values are the same')
+
+    def assert_url(self, result):
+        get_url = self.driver.current_url
+        assert get_url == result
+        print("Correct URL")

@@ -16,6 +16,7 @@ class Main_page(Base):
     ok_cookies_button = "//button[@class='Button-module__button Button-module__blue-primary']"
     account_button = "//button[@class='styles_userToolsToggler__imcSl']"
     catalog_button = "//button[@class='styles_catalogButton__1K6kI']"
+    cart_button = "//a[@class='headerCartBox']"
 
     """Getters"""
 
@@ -27,6 +28,9 @@ class Main_page(Base):
 
     def get_catalog_button(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.catalog_button)))
+
+    def get_cart_button(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.cart_button)))
 
     """Actions"""
 
@@ -41,6 +45,10 @@ class Main_page(Base):
     def click_catalog_button(self):
         self.get_catalog_button().click()
         print('Catalog button is clicked')
+
+    def click_cart_button(self):
+        self.get_cart_button().click()
+        print('Cart button is clicked')
 
     """Methods"""
 

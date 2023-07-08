@@ -24,7 +24,8 @@ class Egg_cookers_page(Base):
     show_items_button = "//span[@class='g-button__text']"
     items_counter = "//span[@id='j-filter__counter']"
     paginator = "//div[@class='cr-paginator_page_list']"
-    bomann_egg_cooker_price = "//span[@data-code='6608212']"
+    bomann_egg_cooker_price_number = "//span[@data-code='6608212']"
+    bomann_egg_cooker_price_unit = "//span[@class='g-price__unit result__priceunit']"
     add_bomann_into_cart_button = "//*[@id='j-result-page-1']/li[4]/dl/div[2]/form/button"
 
     """Getters"""
@@ -56,8 +57,11 @@ class Egg_cookers_page(Base):
     def get_paginator(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.paginator)))
 
-    def get_bomann_egg_cooker_price(self):
-        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.bomann_egg_cooker_price)))
+    def get_bomann_egg_cooker_price_number(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.bomann_egg_cooker_price_number)))
+
+    def get_bomann_egg_cooker_price_unit(self):
+        return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.bomann_egg_cooker_price_unit)))
 
     def get_add_bomann_into_cart_button(self):
         return WebDriverWait(self.driver, 20).until(EC.element_to_be_clickable((By.XPATH, self.add_bomann_into_cart_button)))
@@ -99,10 +103,12 @@ class Egg_cookers_page(Base):
         print(f'number of items are displayed on the page is {items_quantity}')
         return items_quantity
 
-    def bomann_egg_cooker_price_value(self):
-        value_text = self.get_bomann_egg_cooker_price().text
-        print(f'bomann egg cooker price is {value_text}')
-        return value_text
+    def full_bomann_price(self):
+        first_price_value = self.get_bomann_egg_cooker_price_number().text
+        second_price_value = self.get_bomann_egg_cooker_price_unit().text
+        full_price_value = first_price_value + ' ' + second_price_value
+        print(full_price_value)
+        return full_price_value
 
     def click_add_bomann_into_cart_button(self):
         self.action.move_to_element(self.get_add_bomann_into_cart_button()).perform()

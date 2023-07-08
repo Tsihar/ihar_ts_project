@@ -4,11 +4,13 @@ from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 
 from base.base_class import Base
+from pages.cart_page import Cart_page
 from pages.catalog_popup import Catalog_popup
 from pages.egg_cookers_page import Egg_cookers_page
 from pages.login_window import Login_window
 from pages.main_page import Main_page
 from pages.manage_account_popup import Manage_account_popup
+from pages.order_details_page import Order_details_page
 
 
 def test_e2e(open_site):
@@ -43,7 +45,18 @@ def test_e2e(open_site):
     ecp.set_filters()
     bc.assert_text(ecp.get_items_counter(), ecp.paginator_items_quantity_on_page())
 
+    #add egg cooker to cart and item verification
+    cooker_price = ecp.full_bomann_price()
     ecp.click_add_bomann_into_cart_button()
+    mp.click_cart_button()
+    cart_p = Cart_page(fix_driver)
+    bc.assertions(cooker_price, cart_p.full_price_in_cart())
+    cart_p.determine_order_details()
+
+    #verify item price in order details page
+    odp = Order_details_page(fix_driver)
+    bc.assertions(cooker_price, odp.full_price_in_order_details())
+    odp.click_cross_button()
 
 
 
